@@ -6,7 +6,7 @@ import DifferenceKit
 /// A class for backporting `NSCollectionViewDiffableDataSource` introduced in macOS 10.15+.
 /// Represents the data model object for `NSCollectionView` that can be applies the
 /// changes with automatic diffing.
-open class CocoaCollectionViewDiffableDataSource<SectionIdentifierType: Hashable, ItemIdentifierType: Hashable>: NSObject, NSCollectionViewDataSource {
+open class CocoaCollectionViewDiffableDataSource<SectionIdentifierType: Hashable, ItemIdentifierType: Hashable>: NSObject, NSCollectionViewDataSource where ItemIdentifierType: ContentEquatable {
     /// The type of closure providing the item.
     public typealias ItemProvider = (NSCollectionView, IndexPath, ItemIdentifierType) -> NSCollectionViewItem?
 

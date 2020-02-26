@@ -1,14 +1,19 @@
 import UIKit
 import DiffableDataSources
+import DifferenceKit
 
 final class TopViewController: UIViewController {
     enum Section {
         case main
     }
 
-    enum Item {
+    enum Item: ContentEquatable {
         case mountains
         case insertionSort
+
+      func isContentEqual(to source: TopViewController.Item) -> Bool {
+        return self == source 
+      }
     }
 
     @IBOutlet private var tableView: UITableView!

@@ -1,12 +1,13 @@
 import UIKit
 import DiffableDataSources
+import DifferenceKit
 
 final class MountainsViewController: UIViewController {
     enum Section {
         case main
     }
 
-    struct Mountain: Hashable {
+    struct Mountain: Hashable, ContentEquatable {
         var name: String
 
         func contains(_ filter: String) -> Bool {
@@ -17,6 +18,10 @@ final class MountainsViewController: UIViewController {
             let lowercasedFilter = filter.lowercased()
             return name.lowercased().contains(lowercasedFilter)
         }
+
+      func isContentEqual(to source: MountainsViewController.Mountain) -> Bool {
+        return name == source.name
+      }
     }
 
     @IBOutlet private var searchBar: UISearchBar!

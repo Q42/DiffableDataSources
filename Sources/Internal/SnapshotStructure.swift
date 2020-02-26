@@ -1,7 +1,7 @@
 import Foundation
 import DifferenceKit
 
-struct SnapshotStructure<SectionID: Hashable, ItemID: Hashable> {
+struct SnapshotStructure<SectionID: Hashable, ItemID: Hashable> where ItemID: ContentEquatable{
     struct Item: Differentiable, Equatable {
         var differenceIdentifier: ItemID
         var isReloaded: Bool
@@ -16,7 +16,7 @@ struct SnapshotStructure<SectionID: Hashable, ItemID: Hashable> {
         }
 
         func isContentEqual(to source: Item) -> Bool {
-            return !isReloaded && differenceIdentifier == source.differenceIdentifier
+          return !isReloaded && differenceIdentifier.isContentEqual(to: source.differenceIdentifier)
         }
     }
 

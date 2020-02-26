@@ -1,5 +1,6 @@
 import UIKit
 import DiffableDataSources
+import DifferenceKit
 
 final class InsertionSortViewController: UIViewController {
     final class Section: Hashable {
@@ -44,7 +45,7 @@ final class InsertionSortViewController: UIViewController {
         }
     }
 
-    struct Node: Hashable {
+    struct Node: Hashable, ContentEquatable {
         var id = UUID()
         var value: Int
         var color: UIColor
@@ -63,6 +64,10 @@ final class InsertionSortViewController: UIViewController {
         static func == (lhs: Node, rhs: Node) -> Bool {
             return lhs.id == rhs.id
         }
+
+      func isContentEqual(to source: InsertionSortViewController.Node) -> Bool {
+        return value == source.value && color == source.color
+      }
     }
 
     @IBOutlet private var collectionView: UICollectionView!
