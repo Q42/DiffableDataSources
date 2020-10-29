@@ -6,7 +6,7 @@ import DifferenceKit
 /// A class for backporting `UITableViewDiffableDataSource` introduced in iOS 13.0+, tvOS 13.0+.
 /// Represents the data model object for `UITableView` that can be applies the
 /// changes with automatic diffing.
-open class TableViewDiffableDataSource<SectionIdentifierType: Hashable, ItemIdentifierType: Hashable>: NSObject, UITableViewDataSource where ItemIdentifierType: ContentEquatable  {
+open class TableViewDiffableDataSource<SectionIdentifierType: Hashable, ItemIdentifierType: Hashable>: NSObject, UITableViewDataSource where SectionIdentifierType: ContentEquatable, ItemIdentifierType: ContentEquatable  {
     /// The type of closure providing the cell.
     public typealias CellProvider = (UITableView, IndexPath, ItemIdentifierType) -> UITableViewCell?
 
